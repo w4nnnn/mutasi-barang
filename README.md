@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Sistem Keluar-Masuk Barang
 
-## Getting Started
+Aplikasi ini adalah dashboard sederhana untuk mengelola stok barang, mencatat barang masuk/keluar, dan menampilkan nilai persediaan secara realtime menggunakan Next.js (App Router) dan SQLite.
 
-First, run the development server:
+### Fitur Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- CRUD master barang (kode, nama, harga jual, stok).
+- Pencatatan mutasi barang masuk/keluar dengan catatan tambahan.
+- Ringkasan stok (jumlah SKU, stok total, nilai persediaan, stok menipis).
+- Riwayat mutasi terbaru serta penandaan stok rendah (&le; 5 unit).
+
+### Prasyarat
+
+- Node.js 18 atau lebih baru.
+- SQLite sudah termasuk dalam dependensi `better-sqlite3`.
+
+### Konfigurasi Database
+
+Secara bawaan aplikasi akan membuat database lokal pada `database/app.db`. Anda dapat menyesuaikan lokasi dan nama file melalui variabel lingkungan berikut (opsional):
+
+```
+DATABASE_DIR=database
+DATABASE_FILE=app.db
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tambahkan variabel di `.env` bila perlu sebelum menjalankan aplikasi.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Instalasi dan Inisialisasi
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run lint   # opsional, memastikan kode bersih
+node setup.js  # membuat folder database & tabel bila belum ada
+npm run dev    # jalankan aplikasi pada mode pengembangan
+```
 
-## Learn More
+Setelah server berjalan, buka [http://localhost:3000](http://localhost:3000) untuk menggunakan dashboard.
 
-To learn more about Next.js, take a look at the following resources:
+### Struktur Komponen
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `components/inventory/inventory-dashboard.jsx` – UI utama untuk ringkasan stok, form barang baru, dan form mutasi.
+- `app/api/items` – endpoint untuk mengambil, membuat, memperbarui, dan menghapus master barang.
+- `app/api/transactions` – endpoint untuk membuat dan mengambil riwayat mutasi barang.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Testing Manual yang Disarankan
 
-## Deploy on Vercel
+1. Tambah barang baru dengan stok awal dan periksa daftar serta ringkasan.
+2. Catat barang masuk, pastikan stok bertambah dan mutasi muncul.
+3. Catat barang keluar dengan jumlah lebih besar dari stok untuk memastikan validasi.
+4. Refresh halaman; data harus tetap konsisten karena tersimpan di SQLite.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Siapkan database SQLite di server/hosting Anda dan pastikan variabel lingkungan `DATABASE_DIR` dan `DATABASE_FILE` mengarah ke lokasi yang benar sebelum menjalankan `npm run build` dan `npm run start`.

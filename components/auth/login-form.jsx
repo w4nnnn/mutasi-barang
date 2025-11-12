@@ -55,7 +55,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="max-w-5xl min-w-md w-full">
       <CardHeader>
         <CardTitle className="text-2xl font-semibold">Masuk</CardTitle>
         <CardDescription>Gunakan akun yang telah terdaftar untuk mengakses dashboard.</CardDescription>

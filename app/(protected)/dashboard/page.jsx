@@ -31,11 +31,11 @@ export default function DashboardPage() {
         <SidebarHeader>
           <div className="flex items-center gap-2 rounded-lg bg-sidebar-accent/40 px-2 py-1">
             <div className="flex size-8 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">
-              KM
+              HI
             </div>
             <div className="leading-tight">
-              <p className="text-sm font-semibold">Ipin Motor</p>
-              <p className="text-xs text-sidebar-foreground/60">Keluar-Masuk Barang</p>
+              <p className="text-sm font-semibold">Harry IT</p>
+              <p className="text-xs text-sidebar-foreground/60">Administrasi</p>
             </div>
           </div>
         </SidebarHeader>
